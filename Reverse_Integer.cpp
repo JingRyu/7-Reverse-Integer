@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 using namespace std;
 
 //consider int as string this time. will try another
@@ -7,34 +8,46 @@ class Solution {
 public:
     int reverse(int x) {
         int single_digit;
-        int remainer = x;
-        string new_raw_string;
+        long long remainer = x;
+        long long new_number = 0;
+        int counter = 0;
 
-        //x<0
-        if(x>0){
+        while(x != 0){
+            x = x/10;
+            counter++;
+        }
+
+        if(remainer>0){
             while(remainer != 0)
             {
                 single_digit = remainer %10;
                 remainer = remainer/10;
 
-                new_raw_string = new_raw_string + to_string(single_digit);
-
+                new_number = new_number + single_digit*pow(10,counter-1);
+                counter--;
             }
-
-             return  atoi(c_str(new_raw_string));
+             if(new_number>INT_MAX){
+                return 0;
+             }else{
+                return  new_number;
+             }
         //x>0
-        }else if(x<0){
+        }else if(remainer<0){
 
-            remainer = x * (-1);
+            remainer = remainer * (-1);
             while(remainer != 0)
             {
                 single_digit = remainer %10;
                 remainer = remainer/10;
 
-                new_raw_string = new_raw_string + to_string(single_digit);
+                new_number = new_number + single_digit*pow(10,counter-1);
+                counter--;
             }
-
-                return -atoi(c_str(new_raw_string));
+              if(-new_number<INT_MIN){
+                return 0;
+             }else{
+                return  -new_number;
+             }
         // x==0
         }else{
 
