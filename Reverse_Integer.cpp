@@ -8,7 +8,7 @@ class Solution {
 public:
     int reverse(int x) {
         int single_digit;
-        long long remainer = x;
+        int remainer = x;
         long long new_number = 0;
         int counter = 0;
 
@@ -17,8 +17,8 @@ public:
             counter++;
         }
 
-        if(remainer>0){
-            while(remainer != 0)
+
+        while(remainer != 0)
             {
                 single_digit = remainer %10;
                 remainer = remainer/10;
@@ -26,33 +26,10 @@ public:
                 new_number = new_number + single_digit*pow(10,counter-1);
                 counter--;
             }
-             if(new_number>INT_MAX){
-                return 0;
-             }else{
-                return  new_number;
-             }
-        //x>0
-        }else if(remainer<0){
 
-            remainer = remainer * (-1);
-            while(remainer != 0)
-            {
-                single_digit = remainer %10;
-                remainer = remainer/10;
+        if(new_number<INT_MIN || new_number>INT_MAX){return 0;}else{return  new_number;}
 
-                new_number = new_number + single_digit*pow(10,counter-1);
-                counter--;
-            }
-              if(-new_number<INT_MIN){
-                return 0;
-             }else{
-                return  -new_number;
-             }
-        // x==0
-        }else{
 
-            return 0;
-        }
     }
 };
 
@@ -74,21 +51,4 @@ int main()
 }
 
 
-/*int main()
-{
-    //Solution test;
-    //test.reverse(56799000);
-    int single_digit;
-        int remainer;
-        string new_raw_string = "1";
-        string y = "2";
-        string x = new_raw_string + y;
-        cout<<x;
 
-
-    //Solution(0);
-    //Solution(-121234);
-    //Solution(-123);
-
-    return 0;
-}*/
